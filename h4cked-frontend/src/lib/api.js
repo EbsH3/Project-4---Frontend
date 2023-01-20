@@ -2,15 +2,16 @@ import axios from 'axios';
 import { AUTH } from './auth';
 
 const ENDPOINTS = {
-  login: '/api/login',
-  register: '/api/register',
-  vacancies: '/api/vacancies',
-  employers: '/api/employers/',
-  singleEmployer: (id) => `api/employers/${id}`,
-  salaryInfo: '/api/salaries',
-  feedback: '/api/feedback',
-  addFeedback: '/api/feedback/add',
-  tips: 'api/tips',
+  login: `${process.env.REACT_APP_BASE_URL}/api/login`,
+  register: `${process.env.REACT_APP_BASE_URL}/api/register`,
+  vacancies: `${process.env.REACT_APP_BASE_URL}/api/vacancies`,
+  employers: `${process.env.REACT_APP_BASE_URL}/api/employers/`,
+  singleEmployer: (id) =>
+    `${process.env.REACT_APP_BASE_URL}api/employers/${id}`,
+  salaryInfo: `${process.env.REACT_APP_BASE_URL}/api/salaries`,
+  feedback: `${process.env.REACT_APP_BASE_URL}/api/feedback`,
+  addFeedback: `${process.env.REACT_APP_BASE_URL}/api/feedback/add`,
+  tips: `${process.env.REACT_APP_BASE_URL}api/tips`,
 };
 
 const getHeaders = () => ({

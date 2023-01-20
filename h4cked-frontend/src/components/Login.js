@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
-import { useAuthenticated } from '../hooks/useAuthenticated';
+// import { useAuthenticated } from '../hooks/useAuthenticated';
 
 import {
   CssBaseline,

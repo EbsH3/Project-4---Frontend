@@ -29,16 +29,16 @@ export default function Register() {
     passwordConfirmation: '',
   });
 
-  const [file, setFile] = useState('');
+  const [file] = useState('');
   const [error, setError] = useState(false);
 
   const handleChange = (e) =>
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
 
-  const handleFileChange = (e) => {
-    e.preventDefault();
-    setFile(e.target.files[0]);
-  };
+  // const handleFileChange = (e) => {
+  //   e.preventDefault();
+  //   setFile(e.target.files[0]);
+  // };
 
   const handleCreateUser = async (e) => {
     e.preventDefault();

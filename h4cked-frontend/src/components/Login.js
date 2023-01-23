@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
-// import { useAuthenticated } from '../hooks/useAuthenticated';
+import { useAuthenticated } from '../hooks/useAuthenticated';
 
 import {
   CssBaseline,
@@ -23,11 +23,11 @@ export default function Login() {
     password: '',
   });
   const [error, setError] = useState({ username: false, password: false });
-  // const [isLoggedIn] = useAuthenticated();
+  const [isLoggedIn] = useAuthenticated();
 
-  // if (isLoggedIn) {
-  //   navigate('/');
-  // }
+  if (isLoggedIn) {
+    navigate('/');
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,12 +61,12 @@ export default function Login() {
           md={7}
           sx={{
             backgroundImage:
-              'url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/76ffd78e-6fdc-4e52-a221-dd5304e2e982/d7irykc-12c3b2e3-2e50-4e3a-afdb-3745003c4393.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzc2ZmZkNzhlLTZmZGMtNGU1Mi1hMjIxLWRkNTMwNGUyZTk4MlwvZDdpcnlrYy0xMmMzYjJlMy0yZTUwLTRlM2EtYWZkYi0zNzQ1MDAzYzQzOTMuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Lei0BQIfTEGO2KFJopRaBYnmaWx_ApiBUad9UYHIv3U)',
+              'url(https://64.media.tumblr.com/4da8647196fe810f22a8c0b020ce3622/tumblr_nhsqy93xiU1u79o2lo1_640.gifv)',
             backgroundRepeat: 'no-repeat',
-            // backgroundColor: (t) =>
-            //   t.palette.mode === 'light'
-            //     ? t.palette.grey[50]
-            //     : t.palette.grey[900],
+            backgroundColor: (t) =>
+              t.palette.mode === 'light'
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -139,7 +139,7 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href='#' variant='body2'>
+                  <Link href='/register' variant='body2'>
                     {"Don't have an account? Register"}
                   </Link>
                 </Grid>

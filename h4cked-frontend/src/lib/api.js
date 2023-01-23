@@ -2,16 +2,17 @@ import axios from 'axios';
 import { AUTH } from './auth';
 
 const ENDPOINTS = {
-  login: `${process.env.REACT_APP_BASE_URL}/api/login`,
-  register: `${process.env.REACT_APP_BASE_URL}/api/register`,
-  vacancies: `${process.env.REACT_APP_BASE_URL}/api/vacancies`,
+  login: `${process.env.REACT_APP_BASE_URL}/api/login/`,
+  register: `${process.env.REACT_APP_BASE_URL}/api/register/`,
+  vacancies: `${process.env.REACT_APP_BASE_URL}/api/vacancies/`,
   employers: `${process.env.REACT_APP_BASE_URL}/api/employers/`,
   singleEmployer: (id) =>
-    `${process.env.REACT_APP_BASE_URL}api/employers/${id}`,
-  salaryInfo: `${process.env.REACT_APP_BASE_URL}/api/salaries`,
-  feedback: `${process.env.REACT_APP_BASE_URL}/api/feedback`,
-  addFeedback: `${process.env.REACT_APP_BASE_URL}/api/feedback/add`,
-  tips: `${process.env.REACT_APP_BASE_URL}api/tips`,
+    `${process.env.REACT_APP_BASE_URL}api/employers/${id}/`,
+  salaryInfo: `${process.env.REACT_APP_BASE_URL}/api/salaries/`,
+  feedback: `${process.env.REACT_APP_BASE_URL}/api/feedback/`,
+  addFeedback: (id) =>
+    `${process.env.REACT_APP_BASE_URL}/api/employers/${id}/feedback/`,
+  tipsTricks: `${process.env.REACT_APP_BASE_URL}/api/tips/`,
 };
 
 const getHeaders = () => ({

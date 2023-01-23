@@ -69,7 +69,7 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      {['ENTER HERE 🚪'].map((anchor) => (
+      {['  💻'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
           <Drawer

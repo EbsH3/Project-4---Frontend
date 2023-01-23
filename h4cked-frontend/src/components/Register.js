@@ -80,7 +80,11 @@ export default function Register() {
 
   return (
     <>
-      {/* <img className='form' src={Abs} alt='pull-ups' /> */}
+      <img
+        className='registerImage'
+        src={'https://thumbs.gfycat.com/CreamyFormalChanticleer-max-1mb.gif'}
+        alt='pending-access'
+      />
       <ThemeProvider theme={theme}>
         <Container component='main' maxWidth='xs'>
           <CssBaseline />

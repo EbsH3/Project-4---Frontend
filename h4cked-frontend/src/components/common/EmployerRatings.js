@@ -9,7 +9,7 @@ export default function EmployerRatings({ rating, setRating, size }) {
       changeRating={setRating}
       numberOfStars={5}
       name='rating'
-      starDimensio={size}
+      starDimension={size}
     />
   );
 }

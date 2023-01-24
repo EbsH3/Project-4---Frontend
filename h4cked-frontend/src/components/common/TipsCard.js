@@ -2,7 +2,7 @@ import { Card, CardContent, Typography, CardMedia } from '@mui/material';
 
 export default function TipsCard({ name, detail, sector, image }) {
   return (
-    <Card sx={{ maxWidth: 345, height: 450 }}>
+    <Card sx={{ maxWidth: 305, height: 370 }}>
       <CardMedia
         component='img'
         image={image}

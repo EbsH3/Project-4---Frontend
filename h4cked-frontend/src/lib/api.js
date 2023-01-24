@@ -2,16 +2,19 @@ import axios from 'axios';
 import { AUTH } from './auth';
 
 const ENDPOINTS = {
-  login: `${process.env.REACT_APP_BASE_URL}/api/login/`,
-  register: `${process.env.REACT_APP_BASE_URL}/api/register/`,
+  login: `${process.env.REACT_APP_BASE_URL}/api/auth/login/`,
+  register: `${process.env.REACT_APP_BASE_URL}/api/auth/register/`,
   vacancies: `${process.env.REACT_APP_BASE_URL}/api/vacancies/`,
+  sectors: `${process.env.REACT_APP_BASE_URL}/api/sectors/`,
   employers: `${process.env.REACT_APP_BASE_URL}/api/employers/`,
+  singleVacancy: (id) =>
+    `${process.env.REACT_APP_BASE_URL}/api/vacancies/${id}/`,
   singleEmployer: (id) =>
     `${process.env.REACT_APP_BASE_URL}api/employers/${id}/`,
   salaryInfo: `${process.env.REACT_APP_BASE_URL}/api/salaries/`,
-  feedback: `${process.env.REACT_APP_BASE_URL}/api/feedback/`,
-  addFeedback: (id) =>
-    `${process.env.REACT_APP_BASE_URL}/api/employers/${id}/feedback/`,
+  feedback: (id) => `${process.env.REACT_APP_BASE_URL}/api/${id}/feedback/`,
+  // addFeedback: (id) =>
+  //   `${process.env.REACT_APP_BASE_URL}/api/employers/${id}/feedback/`,
   tipsTricks: `${process.env.REACT_APP_BASE_URL}/api/tips/`,
 };
 

@@ -7,11 +7,21 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { useState } from 'react';
+// import { useAuthenticated } from '../hooks/useAuthenticated';
+import { AUTH } from '../lib/auth';
 
 import { Link } from 'react-router-dom';
 
-export default function TemporaryDrawer() {
-  const [state, setState] = React.useState({
+export default function Navbar() {
+  // const [isLoggedIn, setIsLoggedIn] = useAuthenticated();
+
+  const logout = () => {
+    AUTH.logout();
+    // setIsLoggedIn(false);
+  };
+
+  const [state, setState] = useState({
     // top: false,
     left: false,
     // bottom: false,
@@ -40,6 +50,7 @@ export default function TemporaryDrawer() {
         {[
           <Link to='/'>Home</Link>,
           <Link to='/login'>Login</Link>,
+
           <Link to='/register'>Register</Link>,
         ].map((text, index) => (
           <ListItem key={text} disablePadding>
@@ -56,6 +67,9 @@ export default function TemporaryDrawer() {
           <Link to='/vacancies'>Vacancies</Link>,
           <Link to='/salaries'>Salary Benchmarking</Link>,
           <Link to='/tips'>Employability Tips</Link>,
+          <Link to='/' onClick={logout}>
+            Log Out
+          </Link>,
         ].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
@@ -72,6 +86,7 @@ export default function TemporaryDrawer() {
       {['  💻'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+
           <Drawer
             anchor={anchor}
             open={state[anchor]}

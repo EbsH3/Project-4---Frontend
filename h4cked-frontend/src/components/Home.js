@@ -17,7 +17,7 @@ const Home = () => {
 
       <div className='home'>
         <h1>H4CKED</h1>
-        <p>Hack into the job market</p>
+        <p>H4ck th3 j06 m4rket</p>
       </div>
     </section>
   );

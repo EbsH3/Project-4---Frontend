@@ -10,8 +10,14 @@ import Tips from './components/Tips';
 import Feedback from './components/Feedback';
 import Navbar from './components/Navbar';
 import SingleEmployer from './components/SingleEmployer';
+import Fancy from './components/Fancy';
+import EditVacancy from './components/EditVacancy';
+import Sectors from './components/Sectors';
 
 import './styles/App.css';
+import { requirePropFactory } from '@mui/material';
+
+window.Buffer = window.Buffer || requirePropFactory('buffer').Buffer;
 
 function App() {
   return (
@@ -21,9 +27,14 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/vacancies' element={<Vacancies />} />
+          <Route path='/fancy' element={<Fancy />} />
           <Route path='/employers' element={<Employers />} />
+          <Route path='/edit' element={<EditVacancy />} />
           <Route path='/employers/:id' element={<SingleEmployer />} />
           <Route path='/salaries' element={<Salaries />} />
+
+          <Route path='/sectors' element={<Sectors />} />
+
           <Route path='/tips' element={<Tips />} />
           <Route path='/feedback' element={<Feedback />} />
           <Route path='/login' element={<Login />} />

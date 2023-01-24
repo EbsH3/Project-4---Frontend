@@ -4,11 +4,15 @@ import { API } from '../lib/api';
 import { Container, Grid } from '@mui/material';
 import EmployerCard from './common/EmployerCard';
 import Search from './common/Search';
+// import SectorCard from './common/SectorCard';
+// import FeedbackCard from './common/FeedbackCard';
 
 export default function Employers() {
   // const navigate = useNavigate();
   const [employers, setEmployers] = useState(null);
+  // const [feedback, setFeedback] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  // const [sectors, setSectors] = useState(null);
 
   const filterEmployers = () => {
     const regex = new RegExp(searchQuery, 'i');
@@ -28,7 +32,15 @@ export default function Employers() {
       });
   }, []);
 
-  // const employerPage = () => navigate(`/employers/${_id}`);
+  // useEffect(() => {
+  //   API.GET(API.ENDPOINTS.sectors)
+  //     .then(({ data }) => {
+  //       setSectors(data);
+  //     })
+  //     .catch(({ message, response }) => {
+  //       console.error(message, response);
+  //     });
+  // }, []);
 
   return (
     <>
@@ -43,7 +55,7 @@ export default function Employers() {
                   location={employer.location}
                   image={employer.logo}
                   sector={employer.sector}
-                ></EmployerCard>{' '}
+                ></EmployerCard>
               </Grid>
             ))}
         </Grid>
@@ -51,10 +63,3 @@ export default function Employers() {
     </>
   );
 }
-// const Employers = () => {
-//   return (
-//     <div className='home'>
-//       <h1>Employers</h1>
-//     </div>
-//   );
-// };

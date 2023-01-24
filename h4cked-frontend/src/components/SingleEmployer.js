@@ -28,7 +28,7 @@ export default function SingleEmployer() {
         setSingleEmployer(data);
       })
       .catch(({ message, response }) => {
-        console.error(response);
+        console.error(message, response);
       });
     setIsUpdated(false);
   }, [id, isUpdated]);
@@ -36,8 +36,8 @@ export default function SingleEmployer() {
   const allEmployers = () => navigate('/employers');
 
   const userHasReviewed = useMemo(() => {
-    return singleEmployer?.reviews
-      .map((review) => review.reviewer.id)
+    return singleEmployer?.feedback
+      .map((feedback) => feedback.owner._id)
       .some((id) => AUTH.isOwner(id));
   }, [singleEmployer]);
 
@@ -49,23 +49,24 @@ export default function SingleEmployer() {
         className='singleEmployer'
       >
         <Box>
-          <img src={singleEmployer?.image} alt={singleEmployer?.name} />
+          <img src={singleEmployer?.logo} alt={singleEmployer?.name} />
         </Box>
         <CardContent>
           <Typography variant='h5' component='p'>
-            {singleEmployer?.name}
+            {singleEmployer?.employer}
           </Typography>
           <Typography variant='h5' component='p'>
             {singleEmployer?.location}
           </Typography>
           <Typography variant='h5' component='p'>
-            {singleEmployer?.sector}
+            {singleEmployer?.vacancies}
           </Typography>
-          <EmployerRatings rating={singleEmployer?.rating || 0} />
+          <EmployerRatings feedback={singleEmployer?.feedback || 0} />
         </CardContent>
+
         <CardActions>
           {isLoggedIn && !userHasReviewed && (
-            <Link to={`/employers/${singleEmployer?.id}/review`}>
+            <Link to={`/employers/${singleEmployer?._id}/feedback`}>
               <Button size='small'>Spill the tea ☕️</Button>
             </Link>
           )}
@@ -76,10 +77,10 @@ export default function SingleEmployer() {
         </CardActions>
       </Container>
 
-      {!!singleEmployer?.reviews.length && (
+      {!!singleEmployer?.feedback.length && (
         <Container maxWidth='lg'>
           <Box>
-            {singleEmployer?.reviews.map((review) => (
+            {singleEmployer?.feedback.map((review) => (
               <FeedbackCard
                 key={review._id}
                 text={review.text}

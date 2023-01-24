@@ -16,17 +16,17 @@ import {
   Button,
 } from '@mui/material';
 
-export default function Login() {
+const Login = () => {
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState({
     username: '',
     password: '',
   });
+
   const [error, setError] = useState({ username: false, password: false });
   const [isLoggedIn] = useAuthenticated();
-
   if (isLoggedIn) {
-    navigate('/');
+    navigate('/employers');
   }
 
   const handleSubmit = (e) => {
@@ -34,11 +34,11 @@ export default function Login() {
     API.POST(API.ENDPOINTS.login, formFields)
       .then(({ data }) => {
         AUTH.setToken(data.token);
-        navigate('/employers');
+        navigate('/vacancies');
       })
       .catch((e) => {
         console.log(e);
-        if (e.response.data.message === 'That password seems to be incorrect') {
+        if (e.response.data.message === 'Incorrect password') {
           setError({ ...error, password: true });
         } else {
           setError({ username: true, password: true });
@@ -51,7 +51,7 @@ export default function Login() {
   };
 
   return (
-    <Box sx={{ backgroundColor: 'black', flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <Grid container component='main' sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -63,15 +63,10 @@ export default function Login() {
             backgroundImage:
               'url(https://64.media.tumblr.com/4da8647196fe810f22a8c0b020ce3622/tumblr_nhsqy93xiU1u79o2lo1_640.gifv)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light'
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
-
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -82,15 +77,6 @@ export default function Login() {
               alignItems: 'center',
             }}
           >
-            <h1>Log In</h1>
-            <Box
-              component='text'
-              sx={{
-                mt: -10,
-                mb: 2,
-                height: 50,
-              }}
-            />
             <Box
               component='form'
               noValidate
@@ -112,6 +98,7 @@ export default function Login() {
                 autoComplete='username'
                 autoFocus
               />
+
               <TextField
                 margin='normal'
                 required
@@ -138,11 +125,9 @@ export default function Login() {
                 Log In
               </Button>
               <Grid container>
-                <Grid item>
-                  <Link href='/register' variant='body2'>
-                    {"Don't have an account? Register"}
-                  </Link>
-                </Grid>
+                <Link href='/register' variant='body2'>
+                  {"Don't have an account? Register"}
+                </Link>
               </Grid>
             </Box>
           </Box>
@@ -150,4 +135,6 @@ export default function Login() {
       </Grid>
     </Box>
   );
-}
+};
+
+export default Login;

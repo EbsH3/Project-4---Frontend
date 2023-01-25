@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Card,
   CardActions,
@@ -14,10 +15,7 @@ import { useState } from 'react';
 export default function FeedbackCard({
   text,
   reviewer,
-  employer,
-  owner,
-  createdAt,
-  id,
+  employerId,
   reviewId,
   rating,
   setIsUpdated,
@@ -32,10 +30,9 @@ export default function FeedbackCard({
   const saveChanges = () => {
     if (text !== reviewText || rating !== reviewRating) {
       API.PUT(
-        API.ENDPOINTS.feedback(id, reviewId),
+        API.ENDPOINTS.singleReview(employerId, reviewId),
         {
           text: reviewText,
-          employer: employer,
           rating: reviewRating,
         },
         API.getHeaders()
@@ -44,34 +41,36 @@ export default function FeedbackCard({
           toggleEditMode();
           setIsUpdated(true);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.error(e));
     }
   };
 
   const deleteReview = () =>
-    API.DELETE(API.ENDPOINTS.feedback(id, reviewId), API.getHeaders())
+    API.DELETE(
+      API.ENDPOINTS.singleReview(employerId, reviewId),
+      API.getHeaders()
+    )
       .then(() => {
         setIsUpdated(true);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.error(e));
 
   const Rating = () =>
     isEditMode ? (
       <EmployerRatings
         rating={reviewRating}
-        size='20px'
+        size='10px'
         setRating={setReviewRating}
       />
     ) : (
-      <EmployerRatings rating={rating} size='20px' />
+      <EmployerRatings rating={rating} size='10px' />
     );
 
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 200 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-          {' '}
-          {reviewer.owner}{' '}
+          {reviewer.username}
         </Typography>
         {isEditMode ? (
           <TextareaAutosize
@@ -88,7 +87,7 @@ export default function FeedbackCard({
       </CardContent>
       {(AUTH.isOwner(reviewer._id) || AUTH.getPayLoad().isAdmin) && (
         <CardActions>
-          {AUTH.isOwner(reviewer.id) && (
+          {AUTH.isOwner(reviewer._id) && (
             <Button size='small' onClick={toggleEditMode}>
               {isEditMode ? 'Cancel' : 'Edit Feedback'}
             </Button>

@@ -36,7 +36,7 @@ function App() {
           <Route path='/sectors' element={<Sectors />} />
 
           <Route path='/tips' element={<Tips />} />
-          <Route path='/feedback' element={<Feedback />} />
+          <Route path='/employers/:id/feedback' element={<Feedback />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Routes>

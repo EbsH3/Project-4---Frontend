@@ -37,7 +37,7 @@ export default function VacancyCard({
               <br></br>
               {sector}
               <a href={url} target='_blank' rel='noreferrer'>
-                View Job Description{' '}
+                View Job Description
               </a>
             </Item>
           </Stack>

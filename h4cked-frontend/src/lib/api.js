@@ -7,12 +7,13 @@ const ENDPOINTS = {
   vacancies: `${process.env.REACT_APP_BASE_URL}/api/vacancies/`,
   sectors: `${process.env.REACT_APP_BASE_URL}/api/sectors/`,
   employers: `${process.env.REACT_APP_BASE_URL}/api/employers/`,
-  singleVacancy: (id) =>
-    `${process.env.REACT_APP_BASE_URL}/api/vacancies/${id}/`,
   singleEmployer: (id) =>
-    `${process.env.REACT_APP_BASE_URL}api/employers/${id}/`,
+    `${process.env.REACT_APP_BASE_URL}/api/employers/${id}/`,
   salaryInfo: `${process.env.REACT_APP_BASE_URL}/api/salaries/`,
-  feedback: (id) => `${process.env.REACT_APP_BASE_URL}/api/${id}/feedback/`,
+  createReview: (id) =>
+    `${process.env.REACT_APP_BASE_URL}/api/employer/${id}/feedback/`,
+  singleReview: (employerId, reviewId) =>
+    `${process.env.REACT_APP_BASE_URL}/api/employer/${employerId}/feedback/{reviewId}`,
   // addFeedback: (id) =>
   //   `${process.env.REACT_APP_BASE_URL}/api/employers/${id}/feedback/`,
   tipsTricks: `${process.env.REACT_APP_BASE_URL}/api/tips/`,

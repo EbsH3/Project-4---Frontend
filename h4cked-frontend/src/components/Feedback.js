@@ -32,6 +32,10 @@ export default function AddFeedback() {
 
   console.log(employers);
 
+  const handleEmployerChange = (e) => {
+    console.log(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(employers);
@@ -64,9 +68,10 @@ export default function AddFeedback() {
             <Select
               size='small'
               labelId='employer'
-              value={employers}
+              value={'random'}
               label='Employer'
               name='employer'
+              onChange={handleEmployerChange}
             >
               <MenuItem value=''>None</MenuItem>
               {employers.map((employer) => (
@@ -78,7 +83,7 @@ export default function AddFeedback() {
           </FormControl>
         </Box>
 
-        <Box>
+        <Box sx={{ pt: 5, display: 'flex', justifyContent: 'center' }}>
           <TextareaAutosize
             name='feedback'
             value={textValue}
@@ -86,8 +91,8 @@ export default function AddFeedback() {
             label='Feedback'
             type='textarea'
             onChange={handleTextChange}
-            minRows={10}
-            style={{ width: 500 }}
+            minRows={20}
+            style={{ width: 1000 }}
           />
         </Box>
 

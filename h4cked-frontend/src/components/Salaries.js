@@ -18,6 +18,7 @@ export default function Salaries() {
 
   return (
     <Container maxWidth='lg'>
+      <h1 className='salaryHeading'>Salary Benchmarks</h1>
       <Grid container spacing={2}>
         {salaries?.map((salary) => (
           <Grid item xs={4} key={salary.title}>

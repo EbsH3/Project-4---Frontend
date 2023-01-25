@@ -47,19 +47,23 @@ export default function SingleEmployer() {
     <>
       <Container
         maxWidth='lg'
-        sx={{ display: 'flex' }}
+        sx={{ display: 'flex', flexDirection: 'column' }}
         className='singleEmployer'
       >
-        <Box>
-          <img src={singleEmployer?.logo} alt={singleEmployer?.employer} />
-        </Box>
         <CardContent>
-          <Typography variant='h5' component='p'>
-            {singleEmployer?.employer} - {singleEmployer?.location}
+          <Typography variant='h1' component='p'>
+            {singleEmployer?.employer}
           </Typography>
-
-          <EmployerRatings rating={singleEmployer?.rating || 0} />
+          <Typography variant='h4'>{singleEmployer?.location}</Typography>
+          {/* <EmployerRatings rating={singleEmployer?.rating || 0} /> */}
         </CardContent>
+        <Box>
+          <img
+            className='singleEmployerImage'
+            src={singleEmployer?.logo}
+            alt={singleEmployer?.employer}
+          />
+        </Box>
 
         <CardActions>
           {isLoggedIn && !userHasReviewed && (
@@ -76,21 +80,20 @@ export default function SingleEmployer() {
       {!!singleEmployer?.feedback.length && (
         <Container maxWidth='lg'>
           <Box>
-            {singleEmployer?.feedback.map((f) => (
-              <FeedbackCard
-                key={f.id}
-                text={f.text}
-                reviewer={f.owner}
-                employerId={id}
-                reviewId={f.id}
-                rating={f.rating}
-                setIsUpdated={setIsUpdated}
-              ></FeedbackCard>
-            ))}
+            {singleEmployer?.feedback.map((f) => {
+              console.log({ f });
+              return (
+                <FeedbackCard
+                  feedback={f}
+                  employerId={id}
+                  setIsUpdated={setIsUpdated}
+                ></FeedbackCard>
+              );
+            })}
           </Box>
 
-          <Box>
-            <h1>Live Jobs</h1>
+          <Box sx={{ width: 200 }}>
+            <h3 className='activeRoles'>Active Roles</h3>
             {singleEmployer?.vacancies.map((vacancy) => (
               <VacancyCard
                 title={vacancy.title}

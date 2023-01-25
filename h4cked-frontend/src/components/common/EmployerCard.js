@@ -52,7 +52,7 @@ export default function EmployerCard({ name, location, image, sector, id }) {
         />
 
         <Button sx={{ paddingLeft: 20 }}>
-          <Link to='/feedback'>Review</Link>
+          <Link to='/feedback'>View</Link>
         </Button>
         {/* 
         <CardContent>

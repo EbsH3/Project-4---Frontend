@@ -52,23 +52,32 @@ export default function TipsAndTricks() {
   return (
     <Card
       sx={{
-        maxWidth: 900,
-        flexDirection: 'row',
-        paddingLeft: 60,
-        paddingRight: 120,
+        width: 300,
+        flexDirection: 'column',
+        paddingLeft: 10,
+        paddingRight: 200,
       }}
     >
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: 'primary' }} aria-label='recipe'>
+          <Avatar sx={{ bgcolor: 'primary' }} aria-label='tips'>
             IT
           </Avatar>
         }
         title='Interview Tips 101'
       />
-      <Card className='tips' container>
+      <Card
+        className='tips'
+        container
+        sx={{
+          width: 500,
+          flexDirection: 'column',
+          paddingLeft: 60,
+          paddingRight: 60,
+        }}
+      >
         {tips?.map((tip) => (
-          <Grid item xs={12} key={tip.detail}>
+          <Grid item xs={6} key={tip.detail}>
             <TipsCard name={tip.name} image={tip.image}></TipsCard>
           </Grid>
         ))}
@@ -90,14 +99,29 @@ export default function TipsAndTricks() {
           aria-expanded={expanded}
           aria-label='show more'
         >
-          <ExpandMoreIcon />
+          <ExpandMoreIcon
+            sx={{
+              width: 1000,
+              flexDirection: 'column',
+              paddingLeft: 60,
+              paddingRight: 60,
+            }}
+          />
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         {tips?.map((tip) => (
           <CardContent>
-            <Typography paragraph>
-              <TipsCard detail={tip.detail}></TipsCard>
+            <Typography
+              sx={{
+                width: 500,
+                flexDirection: 'column',
+                paddingLeft: 90,
+                paddingRight: 60,
+              }}
+              paragraph
+            >
+              <TipsCard name={tip.name} detail={tip.detail}></TipsCard>
             </Typography>
           </CardContent>
         ))}

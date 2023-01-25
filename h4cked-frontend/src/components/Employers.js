@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { API } from '../lib/api';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Button } from '@mui/material';
 import EmployerCard from './common/EmployerCard';
 import Search from './common/Search';
 // import SectorCard from './common/SectorCard';
 // import FeedbackCard from './common/FeedbackCard';
 
 export default function Employers() {
-  // const navigate = useNavigate();
   const [employers, setEmployers] = useState(null);
   // const [feedback, setFeedback] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');

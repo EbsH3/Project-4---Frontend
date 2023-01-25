@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Box,
@@ -14,11 +14,11 @@ import EmployerRatings from './common/EmployerRatings';
 import { API } from '../lib/api';
 
 export default function AddFeedback() {
-  const { id } = useParams();
   const navigate = useNavigate();
   const [textValue, setTextValue] = useState('');
   const [rating, setRating] = useState(0);
   const [employers, setEmployers] = useState([]);
+  const [selectedEmployer, setSelectedEmployer] = useState('');
 
   const handleTextChange = (e) => {
     setTextValue(e.target.value);
@@ -33,23 +33,26 @@ export default function AddFeedback() {
   console.log(employers);
 
   const handleEmployerChange = (e) => {
-    console.log(e.target.value);
+    setSelectedEmployer(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(employers);
+    const selectedEmployerId = employers.find(
+      (e) => e.employer === selectedEmployer
+    ).id;
+    console.log({ selectedEmployerId });
     API.POST(
       API.ENDPOINTS.createReview,
       {
         text: textValue,
-        employers: employers,
-        rating: rating,
+        employer: selectedEmployerId,
+        // rating: rating
       },
       API.getHeaders()
     )
       .then(() => {
-        navigate(`/employers/${id}`);
+        navigate(`/employers/${selectedEmployerId}`);
       })
       .catch((e) => console.log(e));
   };
@@ -68,14 +71,14 @@ export default function AddFeedback() {
             <Select
               size='small'
               labelId='employer'
-              value={'random'}
+              value={selectedEmployer}
               label='Employer'
               name='employer'
               onChange={handleEmployerChange}
             >
               <MenuItem value=''>None</MenuItem>
               {employers.map((employer) => (
-                <MenuItem key={employer.id} value={employer.id}>
+                <MenuItem key={employer.id} value={employer.employer}>
                   {employer.employer}
                 </MenuItem>
               ))}

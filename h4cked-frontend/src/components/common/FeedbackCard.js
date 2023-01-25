@@ -14,27 +14,25 @@ import { useState } from 'react';
 
 export default function FeedbackCard({
   text,
-  reviewer,
+  owner,
   employerId,
   reviewId,
   rating,
   setIsUpdated,
+  feedback,
 }) {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [reviewText, setReviewText] = useState(text);
-  const [reviewRating, setReviewRating] = useState(rating);
+  const [reviewText, setReviewText] = useState(feedback.text);
+  const [reviewRating, setReviewRating] = useState(feedback.rating);
 
   const toggleEditMode = () => setIsEditMode(!isEditMode);
   const handleReviewTextChange = (e) => setReviewText(e.target.value);
 
   const saveChanges = () => {
-    if (text !== reviewText || rating !== reviewRating) {
+    if (feedback.text !== reviewText || feedback.rating !== reviewRating) {
       API.PUT(
-        API.ENDPOINTS.singleReview(employerId, reviewId),
-        {
-          text: reviewText,
-          rating: reviewRating,
-        },
+        API.ENDPOINTS.singleReview(feedback.id),
+        { ...feedback, text: reviewText, owner: feedback.owner.id },
         API.getHeaders()
       )
         .then(() => {
@@ -46,10 +44,7 @@ export default function FeedbackCard({
   };
 
   const deleteReview = () =>
-    API.DELETE(
-      API.ENDPOINTS.singleReview(employerId, reviewId),
-      API.getHeaders()
-    )
+    API.DELETE(API.ENDPOINTS.singleReview(feedback.id), API.getHeaders())
       .then(() => {
         setIsUpdated(true);
       })
@@ -67,27 +62,28 @@ export default function FeedbackCard({
     );
 
   return (
-    <Card sx={{ minWidth: 200 }}>
+    <Card sx={{ width: 500 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-          {reviewer.username}
+        <Typography sx={{ fontSize: 10 }} color='text.secondary' gutterBottom>
+          {feedback.owner.username}
         </Typography>
+        <Typography>{feedback.text}</Typography>
         {isEditMode ? (
           <TextareaAutosize
             value={reviewText}
             onChange={handleReviewTextChange}
-            style={{ width: '100%', height: '22px' }}
+            style={{ width: '50%', height: '22px' }}
           />
         ) : (
-          <Typography variant='h5' component='div'>
+          <Typography variant='h1' component='div'>
             {text}
           </Typography>
         )}
         <Rating />
       </CardContent>
-      {AUTH.isOwner(reviewer.id) && (
+      {AUTH.isOwner(feedback.owner.id) && (
         <CardActions>
-          {AUTH.isOwner(reviewer.id) && (
+          {AUTH.isOwner(feedback.owner.id) && (
             <Button size='small' onClick={toggleEditMode}>
               {isEditMode ? 'Cancel' : 'Edit Feedback'}
             </Button>

@@ -8,7 +8,7 @@ export default function SalaryCard({
   image,
 }) {
   return (
-    <Card sx={{ maxWidth: 305, height: 290, borderRadius: 100 }}>
+    <Card sx={{ maxWidth: 305, height: 370, borderRadius: 100 }}>
       <CardMedia
         className='media'
         component='img'

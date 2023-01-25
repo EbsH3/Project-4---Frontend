@@ -49,12 +49,13 @@ export default function Employers() {
           <Search value={searchQuery} handleChange={setSearchQuery} />
           {employers &&
             filterEmployers().map((employer) => (
-              <Grid item xs={4} key={employer._id}>
+              <Grid item xs={4} key={employer.id}>
                 <EmployerCard
                   name={employer.employer}
                   location={employer.location}
                   image={employer.logo}
                   sector={employer.sector}
+                  id={employer.id}
                 ></EmployerCard>
               </Grid>
             ))}

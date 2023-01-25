@@ -1,6 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Box, TextareaAutosize, Button } from '@mui/material';
+import {
+  Container,
+  Box,
+  TextareaAutosize,
+  Button,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from '@mui/material';
 import EmployerRatings from './common/EmployerRatings';
 import { API } from '../lib/api';
 
@@ -9,22 +18,33 @@ export default function AddFeedback() {
   const navigate = useNavigate();
   const [textValue, setTextValue] = useState('');
   const [rating, setRating] = useState(0);
+  const [employers, setEmployers] = useState([]);
 
   const handleTextChange = (e) => {
     setTextValue(e.target.value);
   };
 
+  useEffect(() => {
+    API.GET(API.ENDPOINTS.employers)
+      .then(({ data }) => setEmployers(data))
+      .catch((e) => console.log(e));
+  }, []);
+
+  console.log(employers);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(employers);
     API.POST(
-      API.ENDPOINTS.addFeedback(id),
+      API.ENDPOINTS.createReview,
       {
         text: textValue,
+        employers: employers,
         rating: rating,
       },
       API.getHeaders()
     )
-      .then(({ data }) => {
+      .then(() => {
         navigate(`/employers/${id}`);
       })
       .catch((e) => console.log(e));
@@ -39,10 +59,30 @@ export default function AddFeedback() {
     >
       <form onSubmit={handleSubmit}>
         <Box>
+          <FormControl fullWidth>
+            <InputLabel id='employer'>employer</InputLabel>
+            <Select
+              size='small'
+              labelId='employer'
+              value={employers}
+              label='Employer'
+              name='employer'
+            >
+              <MenuItem value=''>None</MenuItem>
+              {employers.map((employer) => (
+                <MenuItem key={employer.id} value={employer.id}>
+                  {employer.employer}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+
+        <Box>
           <TextareaAutosize
             name='feedback'
             value={textValue}
-            placeholder='Tell us about our experience here'
+            placeholder='Tell us about your experience here'
             label='Feedback'
             type='textarea'
             onChange={handleTextChange}
@@ -50,6 +90,7 @@ export default function AddFeedback() {
             style={{ width: 500 }}
           />
         </Box>
+
         <Box>
           <EmployerRatings rating={rating} setRating={setRating} />
         </Box>

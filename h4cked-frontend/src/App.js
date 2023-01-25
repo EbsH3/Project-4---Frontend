@@ -15,9 +15,8 @@ import EditVacancy from './components/EditVacancy';
 import Sectors from './components/Sectors';
 
 import './styles/App.css';
-import { requirePropFactory } from '@mui/material';
 
-window.Buffer = window.Buffer || requirePropFactory('buffer').Buffer;
+window.Buffer = window.Buffer || require('buffer').Buffer;
 
 function App() {
   return (
@@ -36,7 +35,7 @@ function App() {
           <Route path='/sectors' element={<Sectors />} />
 
           <Route path='/tips' element={<Tips />} />
-          <Route path='/employers/:id/feedback' element={<Feedback />} />
+          <Route path='/feedback' element={<Feedback />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Routes>

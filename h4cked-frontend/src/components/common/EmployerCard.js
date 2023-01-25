@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 export default function EmployerCard({ name, location, image, sector, id }) {
   const navigate = useNavigate();
-  const navigateToEmployer = () => navigate(`/employer/${id}/`);
+  const navigateToEmployer = () => navigate(`/employers/${id}/`);
 
   return (
     <Card

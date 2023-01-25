@@ -24,7 +24,12 @@ const getPayLoad = () => {
   return JSON.parse(Buffer.from(parts[1], 'base64'));
 };
 
-const isOwner = (objectId) => objectId === getPayLoad().userId;
+// const isOwner = (objectId) => objectId === getPayLoad().userId;
+// console.log(getPayLoad());
+const isOwner = (objectId) => {
+  console.log('hello', getPayLoad());
+  return objectId === getPayLoad().sub;
+};
 export const AUTH = {
   setToken,
   getToken,

@@ -85,9 +85,9 @@ export default function FeedbackCard({
         )}
         <Rating />
       </CardContent>
-      {(AUTH.isOwner(reviewer._id) || AUTH.getPayLoad().isAdmin) && (
+      {AUTH.isOwner(reviewer.id) && (
         <CardActions>
-          {AUTH.isOwner(reviewer._id) && (
+          {AUTH.isOwner(reviewer.id) && (
             <Button size='small' onClick={toggleEditMode}>
               {isEditMode ? 'Cancel' : 'Edit Feedback'}
             </Button>

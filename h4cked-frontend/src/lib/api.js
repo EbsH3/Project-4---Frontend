@@ -10,12 +10,10 @@ const ENDPOINTS = {
   singleEmployer: (id) =>
     `${process.env.REACT_APP_BASE_URL}/api/employers/${id}/`,
   salaryInfo: `${process.env.REACT_APP_BASE_URL}/api/salaries/`,
-  createReview: (id) =>
-    `${process.env.REACT_APP_BASE_URL}/api/employer/${id}/feedback/`,
+  createReview: `${process.env.REACT_APP_BASE_URL}/api/feedback/`,
   singleReview: (employerId, reviewId) =>
-    `${process.env.REACT_APP_BASE_URL}/api/employer/${employerId}/feedback/{reviewId}`,
-  // addFeedback: (id) =>
-  //   `${process.env.REACT_APP_BASE_URL}/api/employers/${id}/feedback/`,
+    `${process.env.REACT_APP_BASE_URL}/api/employers/${employerId}/feedback/${reviewId}`,
+  addFeedback: `${process.env.REACT_APP_BASE_URL}/api/feedback/`,
   tipsTricks: `${process.env.REACT_APP_BASE_URL}/api/tips/`,
 };
 

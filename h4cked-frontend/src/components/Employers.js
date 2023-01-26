@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/api';
-import { Container, Grid, Button } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import EmployerCard from './common/EmployerCard';
 import Search from './common/Search';
 // import SectorCard from './common/SectorCard';

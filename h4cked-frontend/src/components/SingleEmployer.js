@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { API } from '../lib/api';
 import { AUTH } from '../lib/auth';
-import EmployerRatings from './common/EmployerRatings';
+// import EmployerRatings from './common/EmployerRatings';
 import FeedbackCard from './common/FeedbackCard';
 import { useAuthenticated } from '../hooks/useAuthenticated';
 import VacancyCard from './common/VacancyCard';
